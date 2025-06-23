@@ -19,8 +19,13 @@ export class CardsService {
 		if (userId != loggedUserId) {
 			throw new UnauthorizedException();
 		}
+		
+		//console.log(createCardDto.column);
+		//console.log(await this.columnsService.findOne(columnId));
 	
 		const column = await this.columnsService.findOne(columnId);
+		// or
+		//const column = createCardDto.column;
 	
 		if (column) {
 			const card = new Card();

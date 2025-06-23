@@ -1,29 +1,27 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+# Задача:
+Создать RESTful API с авторизацией для trello (trello.com) на nestjs (https://docs.nestjs.com/);
+Реализовать функционал, схожий с trello, подключаться к апи trello.com не требуется;
+Спроектировать структуру БД при помощи https://dbdiagram.io 
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+# Сущности:
+пользователь;
+колонка;
+карточка;
+комментарий.
 
-## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Один пользователь может иметь несколько колонок. Одна колонка может иметь несколько карточек. Одна карточка может иметь несколько комментариев.
+
+# Требования:
+Создать авторизацию пользователя через емейл + пароль (предварительно создаем модель пользователя). В ответ пользователь должен получать JWT токен, который мы будем прикреплять в Authorization headers и, таким образом, будем идентифицировать пользователей на Backend;
+Подключить базу данных MySQL/PostgreSQL;
+Создать модели и реляционные связи между ними (пользователь, колонка, карточка, комментарий)&;
+Создать CRUD (не используем CRUD модуль nest JS, пишем самостоятельно сервис) эндпоинты по REST-у. Например, юзера мы создаем через POST /users, конкретного юзера получаем через GET /users/{id}, колонки юзера получаем через GET /users/{id}/columns, удаляем через DELETE /users/{userId}/columns/{id} Более подробно читаем в интернете про конвенции RESTful API;
+Должны валидировать все данные которые отправляет нам пользователь. Используем Validation pipe для этого. Валидация на емейл, строку, число, количество символов и т.д;
+Должны проверять через Guards имеет ли право пользователь менять/удалять колонку/карточку/коммент (является ли владельцем этой сущности);
+Используем для документации Swagger (в документации nest js описано подключение). Должны прописывать в swagger все эндпоинты и модели (ApiProperty, ApiTags, ApiOperation и т.п.).
+
 
 ## Project setup
 
